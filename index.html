@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAPHY WEATHER 🌤️🔥 | Weather Homabay - Farming Tips!</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:linear-gradient(180deg,#0066cc,#00d2ff);color:white;padding-bottom:80px;min-height:100vh}
+header{background:rgba(0,0,0,0.2);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
+header b{font-size:18px}
+header button{background:white;color:#0066cc;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer}
+.hero{padding:20px 16px;text-align:center}
+.hero h1{font-size:48px;line-height:1}
+.hero h1 span{font-size:70px;display:block}
+.hero p{font-size:14px;color:#eee;margin:8px 0}
+.hero h2{font-size:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.stat{background:rgba(255,255,255,0.2);border-radius:16px;padding:14px;text-align:center;backdrop-filter:blur(5px)}
+.stat b{font-size:16px;display:block}
+.stat span{font-size:11px;color:#eee}
+.forecast{background:rgba(255,255,255,0.15);border-radius:18px;padding:16px;margin:14px 16px}
+.forecast h3{margin-bottom:10px}
+.day{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.2)}
+.day:last-child{border:none}
+.day b{font-size:14px}
+.day span{font-size:13px}
+.card{background:white;color:#111;border-radius:18px;padding:16px;margin:0 16px 12px}
+.card h3{margin-bottom:8px}
+.card p{font-size:13px;color:#666;line-height:1.6}
+.tabs{display:flex;gap:8px;padding:0 16px;overflow-x:auto}
+.tabs button{background:rgba(255,255,255,0.2);color:white;border:none;padding:10px 16px;border-radius:20px;white-space:nowrap;cursor:pointer;font-weight:bold}
+.tabs button.active{background:white;color:#0066cc}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:white;color:#111;border-top:1px solid #ddd;padding:10px;display:flex;justify-content:space-around;font-size:11px;z-index:30}
+.bottom-nav div{text-align:center;cursor:pointer;color:#888}
+.bottom-nav div.active{color:#0066cc;font-weight:bold}
+.bottom-nav div span{display:block;font-size:22px}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:99;justify-content:center;align-items:flex-end}
+.modalBox{background:white;color:#111;width:100%;max-width:500px;border-radius:20px 20px 0 0;padding:20px;max-height:85vh;overflow-y:auto}
+.modalBox button{padding:11px 16px;border-radius:10px;border:none;font-weight:bold;cursor:pointer;margin:5px}
+</style>
+</head>
+<body>
+
+<header><b>🌤️ TAPHY WEATHER</b><button onclick="showToast('📍 Homabay Town - Updated 5 mins ago!')">📍 Homabay</button></header>
+
+<div class="hero">
+<h2>📍 Homabay Town</h2>
+<p>Wednesday, November 18, 2026 • 11:30 AM</p>
+<h1><span>🌤️</span>28°C</h1>
+<p>Partly Cloudy • Feels like 30°C<br>🌅 Sunrise 6:30 AM • 🌇 Sunset 6:45 PM</p>
+</div>
+
+<div class="grid">
+<div class="stat"><b>💧 65%</b><span>Humidity</span></div>
+<div class="stat"><b>💨 12 km/h</b><span>Wind - Lake Breeze</span></div>
+<div class="stat"><b>🌧️ 20%</b><span>Rain Chance</span></div>
+<div class="stat"><b>👁️ 10 km</b><span>Visibility</span></div>
+</div>
+
+<div class="tabs" style="margin-top:14px">
+<button class="active" onclick="filterWeather(this)">📍 Homabay</button>
+<button onclick="filterWeather(this)">🐟 Soko Mjinga</button>
+<button onclick="filterWeather(this)">🏙️ Kendubay</button>
+<button onclick="filterWeather(this)">🌆 Oyugis</button>
+<button onclick="filterWeather(this)">🏙️ Kisumu</button>
+</div>
+
+<div class="forecast">
+<h3>📅 7 Days Forecast</h3>
+<div class="day"><b>Leo - Wed</b><span>🌤️ Partly Cloudy</span><span><b>28°</b> / 20°</span></div>
+<div class="day"><b>Kesho - Thu</b><span>🌦️ Light Rain</span><span><b>26°</b> / 19°</span></div>
+<div class="day"><b>Fri</b><span>🌧️ Rain</span><span><b>24°</b> / 18°</span></div>
+<div class="day"><b>Sat</b><span>☀️ Sunny</span><span><b>29°</b> / 21°</span></div>
+<div class="day"><b>Sun</b><span>☀️ Sunny</span><span><b>30°</b> / 21°</span></div>
+<div class="day"><b>Mon</b><span>🌤️ Cloudy</span><span><b>27°</b> / 20°</span></div>
+<div class="day"><b>Tue</b><span>🌦️ Light Rain</span><span><b>25°</b> / 19°</span></div>
+</div>
+
+<div class="card">
+<h3>🌾 Farming Tips - Wakulima!</h3>
+<p>🌧️ <b>Mvua inakuja Fri!</b> Panda mahindi sasa, mvua itasaidia!<br>🐟 <b>Wavuvi:</b> Upepo mdogo leo, samaki wengi lake!<br>🌽 <b>Mavuno:</b> Sat & Sun jua kali, kausha mahindi!<br>💧 <b>Maji:</b> Weka maji ya mvua Fri!</p>
+<button style="background:#0066cc;color:white;border:none;padding:12px;border-radius:12px;font-weight:bold;cursor:pointer;width:100%;margin-top:8px" onclick="showToast('🌾 Tips zimetumwa WhatsApp!')">Get Farming Tips →</button>
+</div>
+
+<div class="card">
+<h3>👕 What to Wear Leo?</h3>
+<p>👕 <b>T-Shirt + Shorts</b> - Joto 28°C!<br>🧢 <b>Cap</b> - Jua kali mchana!<br>🌂 <b>Umbrella</b> - Mvua 20% chance, beba just in case!<br>🕶️ <b>Sunglasses</b> - Jua kali!</p>
+</div>
+
+<div class="card">
+<h3>⚠️ Weather Alert!</h3>
+<p>🟡 <b>Yellow Alert - Fri:</b> Mvua kubwa inatarajiwa Fri. Wavuvi msende lake mbali, wakulima weka mavuno ndani!</p>
+</div>
+
+<div style="text-align:center;color:white;font-size:12px;padding:10px">Taphy Weather • Homabay • Made by Taphy Samson 🇰🇪<br>Updated every hour!</div>
+
+<div class="bottom-nav">
+<div class="active"><span>🏠</span>Home</div>
+<div onclick="showToast('📅 7 Days: Fri Mvua!')"><span>📅</span>Forecast</div>
+<div onclick="showToast('🌾 Farming: Panda mahindi sasa!')"><span>🌾</span>Farming</div>
+<div onclick="showToast('🐟 Wavuvi: Upepo mdogo leo!')"><span>🐟</span>Fishing</div>
+<div onclick="showToast('📍 Homabay Town')"><span>📍</span>Location</div>
+</div>
+
+<div class="modal" id="modal"><div class="modalBox"><div id="modalContent"></div><button style="background:#333;color:white;width:100%" onclick="closeModal()">Close ✕</button></div></div>
+<div id="toast" style="position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#111;color:white;padding:10px 18px;border-radius:20px;font-weight:bold;font-size:13px;z-index:100;display:none"></div>
+
+<script>
+function showToast(m){ let t=document.getElementById('toast'); t.innerText=m; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
+function filterWeather(btn){
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let places={'📍 Homabay':'28°C 🌤️ Partly Cloudy','🐟 Soko Mjinga':'29°C ☀️ Sunny','🏙️ Kendubay':'27°C 🌤️ Cloudy','🌆 Oyugis':'26°C 🌦️ Light Rain','🏙️ Kisumu':'30°C ☀️ Sunny'};
+  showToast('🌤️ '+btn.innerText+' - '+(places[btn.innerText]||'28°C'));
+}
+function closeModal(){ document.getElementById('modal').style.display='none'; }
+</script>
+</body>
+</html>
